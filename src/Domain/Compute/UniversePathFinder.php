@@ -6,12 +6,12 @@ use App\Domain\Model\MilleniumFalconConfiguration;
 
 class UniversePathFinder
 {
-    public function find(MilleniumFalconConfiguration $milleniumFalconConfiguration, $universeData): array
+    public function find(MilleniumFalconConfiguration $milleniumFalconConfiguration, $universeRoutes): array
     {
         $departure = $milleniumFalconConfiguration->getDeparture();
         $arrival = $milleniumFalconConfiguration->getArrival();
 
-        $nestedPaths = $this->buildPaths($universeData, $departure, $arrival);
+        $nestedPaths = $this->buildPaths($universeRoutes, $departure, $arrival);
 
         $flattenedPaths = [];
         $numberOfCompletedPaths = 0;
@@ -20,7 +20,7 @@ class UniversePathFinder
         return $flattenedPaths;
     }
 
-    private function flattenPaths($nestedPaths, $departure, $destination, &$flattenedPaths, &$numberOfCompletedPaths)
+    private function  flattenPaths($nestedPaths, $departure, $destination, &$flattenedPaths, &$numberOfCompletedPaths): void
     {
         foreach ($nestedPaths as $nestedPath) {
             $path = $nestedPath;
@@ -39,7 +39,6 @@ class UniversePathFinder
             }
         }
 
-        return $flattenedPaths;
     }
 
     private function buildPaths(array $universePaths, $origin, $destination): array

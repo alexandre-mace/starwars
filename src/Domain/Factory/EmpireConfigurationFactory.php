@@ -7,61 +7,30 @@ use App\Domain\Model\EmpireConfiguration;
 
 class EmpireConfigurationFactory
 {
-    public function createExample1(): EmpireConfiguration
+    public function create(array $empireConfigurationData): EmpireConfiguration
     {
         $empireConfiguration = new EmpireConfiguration();
-        $empireConfiguration->setCountdown(7);
+        $empireConfiguration->setCountdown($empireConfigurationData['countdown']);
 
-        return $this->createBountyHunters($empireConfiguration);
-    }
-
-    public function createExample2(): EmpireConfiguration
-    {
-        $empireConfiguration = new EmpireConfiguration();
-        $empireConfiguration->setCountdown(8);
-
-        return $this->createBountyHunters($empireConfiguration);
-    }
-
-    public function createExample3(): EmpireConfiguration
-    {
-        $empireConfiguration = new EmpireConfiguration();
-        $empireConfiguration->setCountdown(9);
-
-        return $this->createBountyHunters($empireConfiguration);
-    }
-
-    public function createExample4(): EmpireConfiguration
-    {
-        $empireConfiguration = new EmpireConfiguration();
-        $empireConfiguration->setCountdown(10);
-
-        return $this->createBountyHunters($empireConfiguration);
+        return $this->createBountyHunters($empireConfiguration, $empireConfigurationData['bounty_hunters']);
     }
 
     /**
      * @param EmpireConfiguration $empireConfiguration
+     * @param array $bountyHuntersData
      * @return EmpireConfiguration
      */
-    private function createBountyHunters(EmpireConfiguration $empireConfiguration): EmpireConfiguration
+    private function createBountyHunters(EmpireConfiguration $empireConfiguration, array $bountyHuntersData): EmpireConfiguration
     {
-        $bountyHunterDto = new BountyHunterDto();
-        $bountyHunterDto->setPlanet('Hoth');
-        $bountyHunterDto->setDay(6);
+        $bountyHunters = [];
+        foreach ($bountyHuntersData as $bountyHuntersDatum) {
+            $bountyHunterDto = new BountyHunterDto();
+            $bountyHunterDto->setPlanet($bountyHuntersDatum['planet']);
+            $bountyHunterDto->setDay($bountyHuntersDatum['day']);
+            $bountyHunters[] = $bountyHunterDto;
+        }
 
-        $bountyHunterDto2 = new BountyHunterDto();
-        $bountyHunterDto2->setPlanet('Hoth');
-        $bountyHunterDto2->setDay(7);
-
-        $bountyHunterDto3 = new BountyHunterDto();
-        $bountyHunterDto3->setPlanet('Hoth');
-        $bountyHunterDto3->setDay(8);
-
-        $empireConfiguration->setBountyHunters([
-            $bountyHunterDto,
-            $bountyHunterDto2,
-            $bountyHunterDto3,
-        ]);
+        $empireConfiguration->setBountyHunters($bountyHunters);
 
         return $empireConfiguration;
     }

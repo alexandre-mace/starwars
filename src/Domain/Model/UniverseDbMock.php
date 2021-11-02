@@ -10,27 +10,27 @@ class UniverseDbMock
             [
                 'origin' => 'Tatooine',
                 'destination' => 'Dagobah',
-                'travelTime' => 6
+                'travel_time' => 6
             ],
             [
                 'origin' => 'Dagobah',
                 'destination' => 'Endor',
-                'travelTime' => 4
+                'travel_time' => 4
             ],
             [
                 'origin' => 'Dagobah',
                 'destination' => 'Hoth',
-                'travelTime' => 1
+                'travel_time' => 1
             ],
             [
                 'origin' => 'Hoth',
                 'destination' => 'Endor',
-                'travelTime' => 1
+                'travel_time' => 1
             ],
             [
                 'origin' => 'Tatooine',
                 'destination' => 'Hoth',
-                'travelTime' => 6
+                'travel_time' => 6
             ]
         ];
     }

@@ -8,7 +8,7 @@ class FeasablePathFinder
     {
         $pathsTravelTime = array_map(function ($path) {
             return array_sum(array_map(function ($pathNode) {
-                return $pathNode['travelTime'];
+                return $pathNode['travel_time'];
             }, $path));
         }, $universePaths);
 
